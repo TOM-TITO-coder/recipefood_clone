@@ -1,7 +1,8 @@
-// ignore_for_file: prefer_const_constructors, body_might_complete_normally_nullable, prefer_final_fields, avoid_print, unused_local_variable
+// ignore_for_file: prefer_const_constructors, body_might_complete_normally_nullable, prefer_final_fields, avoid_print, unused_local_variable, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:recipfood/services/auth_service.dart';
+import 'package:status_alert/status_alert.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -71,7 +72,7 @@ class _LoginPageState extends State<LoginPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               TextFormField(
-                initialValue: "titotom",
+                initialValue: "kminchelle",
                 onSaved: (value) {
                   setState(() {
                     username = value;
@@ -90,7 +91,7 @@ class _LoginPageState extends State<LoginPage> {
                 height: 50,
               ),
               TextFormField(
-                initialValue: "12345",
+                initialValue: "0lelplR",
                 onSaved: (value) {
                   setState(() {
                     password = value;
@@ -126,8 +127,21 @@ class _LoginPageState extends State<LoginPage> {
             _loginFormKey.currentState?.save();
             bool result = await AuthService().login(
               username!, 
-              password!
+              password!,
             );
+            if (result) {
+              Navigator.pushReplacementNamed(context, "/home");
+            }else{
+              StatusAlert.show(context,
+                duration: const Duration(seconds: 2),
+                title: 'Login failed',
+                subtitle: 'Please try again',
+                configuration: const IconConfiguration(
+                  icon: Icons.error,
+                ),
+                maxWidth: 260, 
+              );
+            }
           }
         },
         child: Text(
