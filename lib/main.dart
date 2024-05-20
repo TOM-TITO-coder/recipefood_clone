@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
             color: Colors.black,
             fontSize: 25,
             fontWeight: FontWeight.bold,
-          )
+          ),
         )
       ),
       initialRoute: "/login",
